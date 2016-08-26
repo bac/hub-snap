@@ -1,0 +1,24 @@
+name: hub
+version: 0  # the version of the snap
+summary: hub helps you win at git. http://hub.github.com/
+description:
+  hub is a command line tool that wraps git in order to extend it with extra features and
+  commands that make working with GitHub easier.
+confinement: strict
+
+apps:
+    hub:
+        command: hub
+    git:
+        command: git
+        plugs: [network, home]
+
+parts:
+    hub:
+        plugin: go
+        go-packages: [github.com/github/hub]
+    git:
+        plugin: autotools
+        source: https://github.com/git/git
+        source-type: git
+        build-packages: [gettext, libssl-dev, libcurl4-openssl-dev, libexpat1-dev]
